@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Datatable Example" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template lwc:if={contacts.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={contacts.data}
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}>
+                </lightning-datatable>
+            </template>
+            <template lwc:if={contacts.error}>
+                <!-- handle Apex error -->
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+
+<!-- ///When a user edits a cell, the updated value is stored in draft-values. -->
+
+<!-- Во примерот, управувачот со настани onsave повикува updateRecord (recordInput, clientOptions) 
+    за да ги зачува промените во записот. -->

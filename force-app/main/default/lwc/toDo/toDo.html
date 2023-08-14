@@ -1,0 +1,96 @@
+<template>
+    <lightning-card title="ToDo List" style="width:100%">
+        <lightning-layout pull-to-boundary="small" style="width: 100%">
+            <!-- Input text field to enter the Label of new Task -->
+            <lightning-layout-item padding=" horizontal-small" flexibility="grow"
+                style="margin-left:16px; margin-right:19px; ">
+                <lightning-input type="text" placeholder="Enter new task" variant="label-hidden" value={newTask}
+                    label="New Task" onchange={insertNewTask} class={priorityClass} autocomplete="off" required>
+                </lightning-input>
+            </lightning-layout-item>
+            <!-- Button to add New Task to the ToDo List -->
+            <lightning-layout-item padding="horizontal-small" style="margin:0 16px; ">
+                <lightning-button variant="brand" type="handleSubmit" label="Add Todo" onclick={addTaskToList}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-button-icon slot="actions" icon-name="utility:sync" alternative-text="Refresh"
+            onclick={refreshTodoList} title="Refresh">
+        </lightning-button-icon>
+        <lightning-layout style="width: 100%">
+            <lightning-layout-item style="width: 100%" padding="around-small">
+                <template if:true={processing}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+                <!-- Iterating the ToDo Tasks and displaying them in a list -->
+                <ul style="width: 100%" class="slds-has-dividers_around-space">
+                    <template for:each={todoTasks} for:item="todoTask">
+                        <li class={todoTask.className} key={todoTask.recordId}>
+                            <lightning-layout vertical-align="center" horizontal-align="spread">
+                                <div style="width: 100%">
+                                    <lightning-layout-item padding="horizontal-small" data-text-id={todoTask.recordId}>
+                                        {todoTask.name}
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="horizontal-small" flexibility="grow">
+                                        <lightning-input type="text" variant="label-hidden" value={todoTask.name}
+                                            label="New Task" autocomplete="off" required style="display: none"
+                                            data-edit-input-id={todoTask.recordId}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </div>
+                                <div
+                                    style="width: 120%; display: flex; align-items: center; justify-content: space-between">
+                                    <div data-actions-id={todoTask.recordId}>
+                                        <lightning-layout-item padding="horizontal-small">
+                                            <lightning-button-icon icon-name="utility:delete" alternative-text="Delete"
+                                                onclick={deleteTaskFromList} name={todoTask.recordId} title="Delete">
+                                            </lightning-button-icon>
+                                            <lightning-button-icon icon-name="utility:edit_form" alternative-text="Edit"
+                                                name={todoTask.name} title="Edit" data-taskid={todoTask.recordId}
+                                                data-subject={todoTask.name} onclick={handleEditTodo}>
+                                            </lightning-button-icon>
+                                        </lightning-layout-item>
+                                    </div>
+                                    <lightning-button data-button-save-id={todoTask.recordId} variant="brand"
+                                        data-taskid={todoTask.recordId} style="display: none" onclick={handleEditSave}
+                                        label="Save">
+                                    </lightning-button>
+                                    <lightning-button data-button-cancel-id={todoTask.recordId}
+                                        data-taskid={todoTask.recordId} style="display: none" onclick={handleCancel}
+                                        variant="brand" label="Cancel">
+                                    </lightning-button>
+                                    <lightning-button-icon icon-name="utility:arrowup"
+                                        data-button-priority-id={todoTask.recordId} alternative-text="High"
+                                        title="High Priority" data-priotirty-button-value="High"
+                                        onclick={updatePriority} class="slds-p-around_xx-small high-priority"
+                                        data-active-priority={todoTask.Priority}></lightning-button-icon>
+                                    <lightning-button-icon icon-name="utility:dash"
+                                        data-button-priority-id={todoTask.recordId} data-priotirty-button-value="Medium"
+                                        alternative-text="Medium" title="Medium Priority"
+                                        class="slds-p-around_xx-small  medium-priority" data-taskid={todoTask.priority}
+                                        onclick={updatePriority}
+                                        data-active-priority={todoTask.Priority}></lightning-button-icon>
+                                    <lightning-button-icon icon-name="utility:arrowdown"
+                                        data-button-priority-id={todoTask.recordId} alternative-text="Low"
+                                        data-priotirty-button-value="Low" title="Low Priority"
+                                        class="slds-p-around_xx-small low-priority" data-taskid={todoTask.priority}
+                                        onclick={updatePriority}
+                                        data-active-priority={todoTask.Priority}></lightning-button-icon>
+                                    <img src={todoTask.getUserPhotoUrl} alt="Owner Photo" />
+                                    <p> {todoTask.owner}</p>
+                                    <lightning-input label="Duplicate Task" class="slds-p-left_xx-large" type="checkbox"
+                                        checked={todoTask.duplicateTask}>
+                                    </lightning-input>
+                                </div>
+                            </lightning-layout>
+                        </li>
+                    </template>
+
+                </ul>
+
+            </lightning-layout-item>
+        </lightning-layout>
+
+    </lightning-card>
+
+</template>

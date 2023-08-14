@@ -1,0 +1,25 @@
+
+lightning-button-icon[data-priotirty-button-value="High"][data-active-priority="High"] {
+  background-color: #d01b1b;
+}
+
+
+lightning-button-icon[data-priotirty-button-value="Medium"][data-active-priority="Medium"] {
+  background-color: rgb(216, 219, 36);
+}
+
+
+lightning-button-icon[data-priotirty-button-value="Low"][data-active-priority="Low"] {
+  background-color: rgb(106, 223, 106);
+}
+
+
+
+
+
+img {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+}

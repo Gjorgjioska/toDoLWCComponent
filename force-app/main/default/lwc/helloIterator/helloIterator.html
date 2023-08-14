@@ -1,0 +1,28 @@
+<template>
+    
+
+    <lightning-card title="HelloIterator" icon-name="custom:custom14">
+        <ul class="slds-m-around_medium">
+            <template iterator:it={contacts}>
+                <li key={it.value.Id}>
+                    <div if:true={it.first} class="list-first" style="border-top: 1px soild red; padding-top: 5px"></div>
+                    {it.value.Name}, {it.value.Title}
+                    <div if:true={it.last} class="list-last"  style="border-bottom: 1px solid red; padding-bottom: 5px"></div>
+                </li>
+                
+            </template>
+        </ul>
+    </lightning-card>
+
+</template>
+
+
+
+<!-- To apply a special behavior to the first or last item in a list,
+use the iterator -->
+
+
+
+<!-- This sample code uses the same array as the previous example.
+to apply special rendering to the first and last items in the list, the code 
+uses the first and last properties with the if:true directive. -->

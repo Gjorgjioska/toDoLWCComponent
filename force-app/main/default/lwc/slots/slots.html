@@ -1,0 +1,35 @@
+<template></template>
+
+
+<!-- slots e markup  што матичната компонента ја пренесува во 
+    телото на компонентата. 
+
+
+
+vo odnos na pristapuvajneto na elementite vo componentata owner korisite
+
+// shadow DOM
+this.template.querySelector('div');
+
+// light DOM
+this.querySelector('div');
+-->
+
+<!-- example.html -->
+<!-- <template>
+    <div>First <slot name="task1">Task 1</slot></div>
+    <div>Second <slot name="task2">Task 2</slot></div>
+ </template>
+
+example.js
+ import { LightningElement } from 'lwc';
+ 
+ export default class Example extends LightningElement {
+     renderedCallback() {
+         this.template.querySelector('div'); // <div>First</div>
+         this.template.querySelector('span'); // null
+         this.template.querySelectorAll('div'); // [<div>First</div>, <div>Second</div>]
+     }
+ } -->
+
+ <!-- kako da ja povrzime, dali postoi moznost za na sandbox  -->
